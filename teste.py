@@ -69,7 +69,11 @@ RED = '\033[31m'
 RESET = '\033[0;0m'
 
 while choice != 3:
-    choice = int(input('Digite 1 para adicionar dados, 2 para ver dados salvos, e para sair.\n'))
+    try:
+        choice = int(input('Digite 1 para adicionar dados, 2 para ver dados salvos, e 3 para sair.\n'))
+    except ValueError:
+        os.system("clear")
+        continue
     os.system("clear")
     if choice == 1:
     
