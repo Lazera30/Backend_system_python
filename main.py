@@ -9,9 +9,6 @@ from Pessoa import Pessoa
 
 
 
-
-
-
 ATRIBUTOSPESSOA = 8
 # para '__true = True' qualquer 'symbols' dentro de 'nome' = falha
 # para '__true = False' o 'nome' tem que estar contido em 'symbols'
@@ -50,12 +47,7 @@ def FindRegById(lstUpdate):
             if gui == lstUpdate[ATRIBUTOSPESSOA*i].strip('\n'):
                 return i
         print(RED + 'Id não encontrado, tente outro' + RESET)
-            
-        
-            
-
-
-               
+                          
 def PrintUpdatePessoa(lstUpdate):
     lstUpdate = Pessoa    
     os.system("clear")
@@ -122,8 +114,7 @@ def printCadastro (indexador):
     if indexador == 12:
         return
     print(NewPerson.Email)
-
-    
+   
 os.system("clear")
 guilherme = 'superman'
 print (guilherme)
@@ -171,6 +162,7 @@ while choice != 5:
                 continue
             NewPerson.Idade = str(NewPerson.Idade)
             break
+        
         printCadastro(4)
         while True:
             NewPerson.Endereco = input()
@@ -179,6 +171,7 @@ while choice != 5:
                 print(RED +"Digite um endereço valido"+ RESET)
                 continue
             break
+        
         printCadastro(6)
         while True:
             NewPerson.Telefone = input()
@@ -187,6 +180,7 @@ while choice != 5:
                 print(RED +"Digite um telefone valido"+ RESET)
                 continue
             break
+        
         printCadastro(8)
         while True:
             NewPerson.Sexo = input()
@@ -194,6 +188,7 @@ while choice != 5:
                 break
             printCadastro(9)
             print(RED +"apenas 'h' e 'm' são aceitos"+ RESET)
+            
         printCadastro(10)
         while True:
             NewPerson.Profissao = input()
@@ -203,6 +198,7 @@ while choice != 5:
                 NewPerson.Profissao = ''
                 continue
             break
+        
         printCadastro(12)
         while True:
             NewPerson.Email = input()
@@ -212,6 +208,7 @@ while choice != 5:
                 NewPerson.Email = ''
                 continue
             break
+        
         try:        
             fd = open('./cadastros/bd-id.txt', 'r')
         except FileNotFoundError:
@@ -219,6 +216,7 @@ while choice != 5:
             fd.write('0')
             fd.close()
             fd = open('./cadastros/bd-id.txt', 'r')
+            
         idPlus = fd.readlines()
         idPlus[0] = str(int(idPlus[0])+1)
         print(idPlus)
@@ -238,6 +236,7 @@ while choice != 5:
         indexLine = line.split('\n')
         i=0
         len = indexLine.__len__() - 1
+        
         while i < len:
             print("ID: " + indexLine[i])
             print("Nome: " + indexLine[i+1])
@@ -248,6 +247,7 @@ while choice != 5:
             print("Profissão: " + indexLine[i+6])
             print("Email: " + indexLine[i+7] + '\n')
             i = i + ATRIBUTOSPESSOA
+            
         fd.close()
         print('Digite qualquer coisa para voltar ao menu inicial.')
         getchar()
@@ -286,6 +286,7 @@ while choice != 5:
                         print( RED + "Digite um nome valido" + RESET)
                         continue
                     break
+                
             if upi == 2:
                 print('Digite a idade.')
                 while True:
@@ -303,6 +304,7 @@ while choice != 5:
                         continue
                     updatePerson.Idade = str(updatePerson.Idade)
                     break
+                
             if upi == 3:
                 print('Digite o endereço.')
                 while True:
@@ -334,6 +336,7 @@ while choice != 5:
                 
             if upi == 6:
                 print('Digite a profissão.')
+                
                 while True:
                     updatePerson.Profissao = input()
                     if not Validate(updatePerson.Profissao, "!@#$%*()-_=+[}{]~^'`,<.>;:/?\|*1234567890", True):
@@ -345,6 +348,7 @@ while choice != 5:
                 
             if upi == 7:
                 print('Digite o email.')
+                
                 while True:
                     updatePerson.Email = input()
                     if not Validate(updatePerson.Email, "!#$%*()-=+[}{]~^'`,<>;:/?\|*", True):
@@ -353,7 +357,9 @@ while choice != 5:
                         updatePerson.Email = ''
                         continue
                     break
+                
             break
+        
         lstCadastroLines[updateIndex + 1] = updatePerson.Nome + '\n'
         lstCadastroLines[updateIndex + 2] = updatePerson.Idade + '\n'
         lstCadastroLines[updateIndex + 3] = updatePerson.Endereco + '\n'
@@ -361,10 +367,11 @@ while choice != 5:
         lstCadastroLines[updateIndex + 5] = updatePerson.Sexo + '\n'
         lstCadastroLines[updateIndex + 6] = updatePerson.Profissao + '\n'
         lstCadastroLines[updateIndex + 7] = updatePerson.Email + '\n'
-        
         stringUpdate = ''
+        
         for i in range(lstCadastroLines.__len__()):
             stringUpdate = stringUpdate + lstCadastroLines[i]
+        
         fd = open('./cadastros/bd-teste.txt', 'w')
         fd.write(stringUpdate)
         fd.close()
@@ -372,6 +379,7 @@ while choice != 5:
         print('Alteração feita com sucesso.!')
         getchar()
         os.system("clear")
+        
     if choice == 4: #delete
         fd = open('./cadastros/bd-teste.txt', 'r')
         lstCadastroLines = fd.readlines()
@@ -387,6 +395,7 @@ while choice != 5:
         updatePerson.Sexo = lstCadastroLines[updateIndex + 5].strip('\n')
         updatePerson.Profissao = lstCadastroLines[updateIndex + 6].strip('\n')
         updatePerson.Email = lstCadastroLines[updateIndex + 7].strip('\n')
+        
         while True:
             PrintDeletePessoa(updatePerson)
             deletar = getchar()
@@ -402,10 +411,11 @@ while choice != 5:
                 lstCadastroLines[updateIndex + 5] = ''
                 lstCadastroLines[updateIndex + 6] = ''
                 lstCadastroLines[updateIndex + 7] = ''
-                
                 stringUpdate = ''
+                
                 for i in range(lstCadastroLines.__len__()):
                     stringUpdate = stringUpdate + lstCadastroLines[i]
+                
                 fd = open('./cadastros/bd-teste.txt', 'w')
                 fd.write(stringUpdate)
                 fd.close()
